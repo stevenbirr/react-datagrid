@@ -70,6 +70,7 @@ var columns = [
     { name: 'email', width: 200 }
 ]
 
+
 var ROW_HEIGHT = 31
 var LEN = 2000
 var SORT_INFO = [{name: 'country', dir: 'asc'}]//[ { name: 'id', dir: 'asc'} ]
