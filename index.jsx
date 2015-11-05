@@ -63,7 +63,7 @@ var ExternalHeading = React.createClass({
 
 var columns = [
     { name: 'index', title: '#', width: 50},
-    { name: 'country', width: 200, head: <div><ExternalHeading title="Sort prop 1"/><ExternalHeading title="Sort prop 2"/></div>},
+    { name: 'country', width: 200, title: <div><ExternalHeading title="Sort prop 1"/><ExternalHeading title="Sort prop 2"/></div>},
     { name: 'city', width: 150 },
     { name: 'firstName' },
     { name: 'lastName'  },
@@ -91,6 +91,9 @@ var App = React.createClass({
             columns={columns}
             style={{height: 400}}
             onColumnResize={this.onColumnResize}
+            sortable={false}
+            filterable={false}
+            withColumnMenu={false}
         />
     },
     handleSortChange: function(sortInfo){
