@@ -45,9 +45,25 @@ var gen = (function(){
 
 var RELOAD = true
 
+var ExternalHeading = React.createClass({
+
+    handleClick(){
+        console.log("handleClick in ExternalHeading", this.props.title);
+    },
+
+    render: function() {
+
+        var icon = <span>&#916;</span>;
+
+        return (
+            <div onClick={this.handleClick}>{this.props.title} {icon}</div>
+        );
+    }
+});
+
 var columns = [
     { name: 'index', title: '#', width: 50},
-    { name: 'country', width: 200},
+    { name: 'country', width: 200, head: <div><ExternalHeading title="Sort prop 1"/><ExternalHeading title="Sort prop 2"/></div>},
     { name: 'city', width: 150 },
     { name: 'firstName' },
     { name: 'lastName'  },

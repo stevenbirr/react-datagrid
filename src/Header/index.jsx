@@ -169,6 +169,12 @@ module.exports = React.createClass({
             left: 0
         }
 
+        if (column.head) {
+            text = (column.head);
+            column.sortable = false;
+            props.withColumnMenu = false;
+        }
+
         var menu = this.renderColumnMenu(props, state, column, index)
 
         if (state.dragColumn && state.shiftIndexes && state.shiftIndexes[index]){
