@@ -14,9 +14,9 @@
     "dist": "webpack --progress --colors --config build/dist.config.js",
     "watch-dist": "webpack --watch --progress --colors --config build/dist.config.js",
     "dist.min": "webpack --progress --colors -p --config build/dist.min.config.js",
-    "build": "NODE_ENV=production npm run lib && npm run dist && npm run dist.min && npm run build-style && npm run build-style-dist && npm run build-style-dist-min",
-    "dev": "NODE_ENV=production PORT=9090 webpack-dev-server --progress --colors --config  build/dev.config.js",
-    "hot": "NODE_ENV=production HOT=true PORT=9090 webpack-dev-server --progress --colors --config build/dev.config.js"
+    "build": "set NODE_ENV=production npm run lib && npm run dist && npm run dist.min && npm run build-style && npm run build-style-dist && npm run build-style-dist-min",
+    "dev": "set PORT=9090 set NODE_ENV=production&&webpack-dev-server --progress --colors --config  build/dev.config.js",
+    "hot": "set PORT=9090 set HOT=true set NODE_ENV=production&&webpack-dev-server --progress --colors --config build/dev.config.js"
   },
   "repository": {
     "type": "git",
@@ -67,7 +67,8 @@
     "es6-promise": "^2.1.1",
     "hasown": "^1.0.1",
     "normalize.css": "^3.0.3",
-    "object-assign": "^2.0.0",
+    "object-assign": "^1.0.0",
+    "react": "^0.13.3",
     "react-load-mask": "^1.0.1",
     "react-menus": "^1.1.1",
     "react-simple-toolbar": "^1.0.5",
@@ -75,12 +76,12 @@
     "react-virtual-scroller": "^1.1.2",
     "region": "^2.1.2",
     "region-align": "^2.1.2",
+    "rx": "^3.1.2",
+    "rx-react": "^0.2.1",
     "ustring": "^1.4.1",
     "whatwg-fetch": "^0.7.0"
   },
-  "peerDependencies": {
-    "react": ">=0.13.0"
-  },
+  "peerDependencies": {},
   "author": "ZippyUI <contact@zippyui.com>",
   "contributors": [],
   "license": "MIT",
