@@ -167,7 +167,7 @@ module.exports = React.createClass({
         var className = props.cellClassName || ''
         var style     = {
             left: 0
-        }
+        } 
 
         var menu = this.renderColumnMenu(props, state, column, index)
 
