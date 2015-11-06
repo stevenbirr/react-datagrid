@@ -82,6 +82,12 @@ var App = React.createClass({
         firstCol.width = firstSize
         this.setState({})
     },
+    handleColumnOrderChange: function (index, dropIndex){
+      var col = columns[index]
+      columns.splice(index, 1) //delete from index, 1 item
+      columns.splice(dropIndex, 0, col)
+      this.setState({})
+    },
     render: function(){
         return <DataGrid
             ref="dataGrid"
@@ -95,6 +101,8 @@ var App = React.createClass({
             sortable={false}
             filterable={false}
             withColumnMenu={false}
+            reorderColumns={true}
+            onColumnOrderChange={this.handleColumnOrderChange}
         />
     },
     handleSortChange: function(sortInfo){
