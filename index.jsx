@@ -25,7 +25,7 @@ var gen = (function(){
 
         for (var i = 0; i < len; i++){
             arr.push({
-                id       : i + 1,
+                id       : i,
                 // id: Guid.create(),
                 grade      : Math.round(Math.random() * 10),
                 email    : faker.internet.email(),
@@ -60,16 +60,29 @@ var SORT_INFO = [{name: 'country', dir: 'asc'}]//[ { name: 'id', dir: 'asc'} ]
 var sort = sorty(SORT_INFO)
 var data = gen(LEN);
 
+var SELECTED_ID = data[5].id
+var name = data[5].firstName
+
 class App extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.handleSortChange = this.handleSortChange.bind(this);
         this.onColumnResize = this.onColumnResize.bind(this);
+        this.onSelectionChange = this.onSelectionChange.bind(this);
     }
 
     onColumnResize(firstCol, firstSize, secondCol, secondSize) {
         firstCol.width = firstSize
         this.setState({})
+    }
+
+    onSelectionChange(newSelectedId, data){
+      SELECTED_ID = newSelectedId
+
+      name = SELECTED_ID != null? data.firstName: 'none'
+
+      console.log(SELECTED_ID)
+      this.setState({})
     }
 
     render() {
@@ -82,6 +95,8 @@ class App extends React.Component {
             columns={columns}
             style={{height: 400}}
             onColumnResize={this.onColumnResize}
+            selected={SELECTED_ID}
+            onSelectionChange={this.onSelectionChange}
         />
     }
 
@@ -90,6 +105,8 @@ class App extends React.Component {
         data = sort(data)
         this.setState({})
     }
+
+
 }
 
 ReactDOM.render((

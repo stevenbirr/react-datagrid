@@ -34,9 +34,9 @@ module.exports = function renderRow(props, data, index, fn){
 
     var selected = false
 
-    if (typeof props.selected == 'object' && props.selected){
+    if (typeof props.selected == 'object' && props.selected != null){
         selected = !!props.selected[selectedKey]
-    } else if (props.selected){
+    } else if (props.selected != null){
         selected = selectedKey === props.selected
     }
 
