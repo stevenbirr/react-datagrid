@@ -1,16 +1,16 @@
 'use strict';
 
 require('./index.styl')
-require('react');
 
-var Guid = require('guid')
+//var Guid = require('node-uuid')
 var sorty = require('sorty')
 var React = require('react')
+var ReactDOM = require('react-dom')
 var DataGrid = require('./src')
 var faker = window.faker = require('faker');
 var preventDefault = require('./src/utils/preventDefault')
 
-// console.log('x');
+console.log(React.version,' react version');
 var gen = (function(){
 
     var cache = {}
@@ -45,31 +45,14 @@ var gen = (function(){
 
 var RELOAD = true
 
-var ExternalHeading = React.createClass({
-
-    handleClick(){
-        console.log("handleClick in ExternalHeading", this.props.title);
-    },
-
-    render: function() {
-
-        var icon = <span>&#916;</span>;
-
-        return (
-            <div onClick={this.handleClick}>{this.props.title} {icon}</div>
-        );
-    }
-});
-
 var columns = [
     { name: 'index', title: '#', width: 50},
-    { name: 'country', width: 200, title: <div><ExternalHeading title="Sort prop 1"/><ExternalHeading title="Sort prop 2"/></div>},
+    { name: 'country', width: 200},
     { name: 'city', width: 150 },
     { name: 'firstName' },
     { name: 'lastName'  },
     { name: 'email', width: 200 }
 ]
-
 
 var ROW_HEIGHT = 31
 var LEN = 2000
@@ -77,18 +60,19 @@ var SORT_INFO = [{name: 'country', dir: 'asc'}]//[ { name: 'id', dir: 'asc'} ]
 var sort = sorty(SORT_INFO)
 var data = gen(LEN);
 
-var App = React.createClass({
-    onColumnResize: function(firstCol, firstSize, secondCol, secondSize){
+class App extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.handleSortChange = this.handleSortChange.bind(this);
+        this.onColumnResize = this.onColumnResize.bind(this);
+    }
+
+    onColumnResize(firstCol, firstSize, secondCol, secondSize) {
         firstCol.width = firstSize
         this.setState({})
-    },
-    handleColumnOrderChange: function (index, dropIndex){
-      var col = columns[index]
-      columns.splice(index, 1) //delete from index, 1 item
-      columns.splice(dropIndex, 0, col)
-      this.setState({})
-    },
-    render: function(){
+    }
+
+    render() {
         return <DataGrid
             ref="dataGrid"
             idProperty='id'
@@ -98,20 +82,16 @@ var App = React.createClass({
             columns={columns}
             style={{height: 400}}
             onColumnResize={this.onColumnResize}
-            sortable={false}
-            filterable={false}
-            withColumnMenu={false}
-            reorderColumns={true}
-            onColumnOrderChange={this.handleColumnOrderChange}
         />
-    },
-    handleSortChange: function(sortInfo){
+    }
+
+    handleSortChange(sortInfo) {
         SORT_INFO = sortInfo
         data = sort(data)
         this.setState({})
     }
-})
+}
 
-React.render((
+ReactDOM.render((
     <App />
 ), document.getElementById('content'))
